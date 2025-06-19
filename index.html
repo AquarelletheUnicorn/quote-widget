@@ -12,14 +12,13 @@
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb') no-repeat center center fixed;
+      background: url('citafond.png') no-repeat center center fixed;
       background-size: cover;
       color: white;
       position: relative;
       z-index: 1;
     }
 
-    /* Brume animée superposée */
     body::before {
       content: "";
       position: fixed;
@@ -52,7 +51,8 @@
       letter-spacing: 2px;
     }
 
-    .quote-text, .quote-author {
+    .quote-text,
+    .quote-author {
       opacity: 0;
       transition: opacity 0.8s ease-in-out;
     }
@@ -108,21 +108,3 @@
       const quote = quotes[Math.floor(Math.random() * quotes.length)];
 
       quoteEl.style.opacity = 0;
-      authorEl.style.opacity = 0;
-
-      setTimeout(() => {
-        quoteEl.textContent = quote.text;
-        authorEl.textContent = `— ${quote.author}`;
-        quoteEl.style.opacity = 1;
-        authorEl.style.opacity = 1;
-      }, 500);
-    }
-
-    // Initial load
-    showRandomQuote();
-
-    // Update every 10 minutes
-    setInterval(showRandomQuote, 600000);
-  </script>
-</body>
-</html>
