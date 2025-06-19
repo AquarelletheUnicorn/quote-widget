@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Quote Widget</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+
+    .widget {
+      background-color: rgba(0, 100, 0, 0.6);
+      margin: 5% auto;
+      padding: 30px;
+      max-width: 500px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .widget h1 {
+      margin-bottom: 20px;
+      font-size: 2em;
+      letter-spacing: 2px;
+    }
+
+    .quote-text {
+      font-style: italic;
+      font-size: 1.2em;
+      line-height: 1.6;
+      transition: opacity 0.5s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+  <div class="widget">
+    <h1>Quote</h1>
+    <blockquote class="quote-text" id="quoteText">
+      Chargement de la citation...
+    </blockquote>
+  </div>
+
+  <script>
+    const quotes = [
+      "« La nature est un temple où de vivants piliers... » — Charles Baudelaire",
+      "« Il n’y a point de génie sans un grain de folie. » — Aristote",
+      "« Le plus grand secret du bonheur, c’est d’être bien avec soi. » — Bernard Fontenelle",
+      "« Celui qui déplace une montagne commence par déplacer de petites pierres. » — Confucius",
+      "« En marchant dans les bois, on trouve bien plus que ce que l’on cherche. » — John Muir"
+    ];
+
+    function showRandomQuote() {
+      const quoteEl = document.getElementById("quoteText");
+      const newQuote = quotes[Math.floor(Math.random() * quotes.length)];
+      quoteEl.style.opacity = 0;
+      setTimeout(() => {
+        quoteEl.textContent = newQuote;
+        quoteEl.style.opacity = 1;
+      }, 500);
+    }
+
+    // Initial load
+    showRandomQuote();
+
+    // Change quote every 10 minutes (600000 ms)
+    setInterval(showRandomQuote, 600000);
+  </script>
+</body>
+</html>
