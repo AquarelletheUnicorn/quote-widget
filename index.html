@@ -31,25 +31,66 @@
       font-size: 1.8em;
     }
 
-    .citation-widget blockquote {
-      font-size: 1.2em;
-      font-style: italic;
-      line-height: 1.6;
-      margin: 0;
+    blockquote, p {
+      opacity: 0;
+      transition: opacity 1s ease;
     }
 
-    .citation-widget p {
-      margin-top: 15px;
+    .quote-button {
+      margin-top: 25px;
+      padding: 8px 20px;
       font-size: 1em;
-      font-weight: 300;
+      border: none;
+      border-radius: 6px;
+      background-color: #2ecc71;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .quote-button:hover {
+      background-color: #27ae60;
     }
   </style>
 </head>
 <body>
   <div class="citation-widget">
     <h1>Quote</h1>
-    <blockquote>« Le plus grand secret du bonheur, c’est d’être bien avec soi. »</blockquote>
-    <p>— Bernard Fontenelle</p>
+    <blockquote id="quote">Chargement…</blockquote>
+    <p id="author"></p>
+    <button class="quote-button" onclick="afficherCitation()">Nouvelle citation</button>
   </div>
+
+  <script>
+    const citations = [
+      { texte: "« Le plus grand secret du bonheur, c’est d’être bien avec soi. »", auteur: "Bernard Fontenelle" },
+      { texte: "« Celui qui déplace une montagne commence par déplacer de petites pierres. »", auteur: "Confucius" },
+      { texte: "« La nature est un temple où de vivants piliers murmurent parfois des paroles confuses. »", auteur: "Charles Baudelaire" },
+      { texte: "« En marchant dans les bois, on trouve bien plus que ce que l’on cherche. »", auteur: "John Muir" },
+      { texte: "« Il n’y a point de génie sans un grain de folie. »", auteur: "Aristote" }
+    ];
+
+    function afficherCitation() {
+      const quoteEl = document.getElementById('quote');
+      const authorEl = document.getElementById('author');
+
+      quoteEl.style.opacity = 0;
+      authorEl.style.opacity = 0;
+
+      setTimeout(() => {
+        const citation = citations[Math.floor(Math.random() * citations.length)];
+        quoteEl.textContent = citation.texte;
+        authorEl.textContent = `— ${citation.auteur}`;
+        quoteEl.style.opacity = 1;
+        authorEl.style.opacity = 1;
+      }, 800);
+    }
+
+    // Démarrage initial
+    afficherCitation();
+
+    // Mise à jour toutes les 10 minutes = 600000 ms
+    setInterval(afficherCitation, 600000);
+  </script>
 </body>
 </html>
