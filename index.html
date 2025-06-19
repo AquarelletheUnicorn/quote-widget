@@ -2,109 +2,54 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Quote Widget</title>
+  <title>Widget de Citation</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
       background: url('citafond.png') no-repeat center center fixed;
       background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
       color: white;
-      position: relative;
-      z-index: 1;
     }
 
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif') no-repeat center center;
-      background-size: cover;
-      opacity: 0.06;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .widget {
-      background-color: rgba(0, 100, 0, 0.6);
-      margin: 5% auto;
+    .citation-widget {
+      background-color: rgba(0, 0, 0, 0.6);
       padding: 30px;
-      max-width: 500px;
-      border-radius: 10px;
+      border-radius: 12px;
       text-align: center;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
-      position: relative;
-      z-index: 2;
+      max-width: 500px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
     }
 
-    .widget h1 {
+    .citation-widget h1 {
       margin-bottom: 20px;
-      font-size: 2em;
-      letter-spacing: 2px;
+      font-size: 1.8em;
     }
 
-    .quote-text,
-    .quote-author {
-      opacity: 0;
-      transition: opacity 0.8s ease-in-out;
-    }
-
-    .quote-text {
-      font-style: italic;
+    .citation-widget blockquote {
       font-size: 1.2em;
+      font-style: italic;
       line-height: 1.6;
+      margin: 0;
     }
 
-    .quote-author {
-      margin-top: 10px;
+    .citation-widget p {
+      margin-top: 15px;
       font-size: 1em;
       font-weight: 300;
     }
   </style>
 </head>
 <body>
-  <div class="widget">
+  <div class="citation-widget">
     <h1>Quote</h1>
-    <blockquote class="quote-text" id="quoteText">Chargement…</blockquote>
-    <p class="quote-author" id="quoteAuthor"></p>
+    <blockquote>« Le plus grand secret du bonheur, c’est d’être bien avec soi. »</blockquote>
+    <p>— Bernard Fontenelle</p>
   </div>
-
-  <script>
-    const quotes = [
-      {
-        text: "« La nature est un temple où de vivants piliers... »",
-        author: "Charles Baudelaire"
-      },
-      {
-        text: "« Il n’y a point de génie sans un grain de folie. »",
-        author: "Aristote"
-      },
-      {
-        text: "« Le plus grand secret du bonheur, c’est d’être bien avec soi. »",
-        author: "Bernard Fontenelle"
-      },
-      {
-        text: "« Celui qui déplace une montagne commence par déplacer de petites pierres. »",
-        author: "Confucius"
-      },
-      {
-        text: "« En marchant dans les bois, on trouve bien plus que ce que l’on cherche. »",
-        author: "John Muir"
-      }
-    ];
-
-    function showRandomQuote() {
-      const quoteEl = document.getElementById("quoteText");
-      const authorEl = document.getElementById("quoteAuthor");
-
-      const quote = quotes[Math.floor(Math.random() * quotes.length)];
-
-      quoteEl.style.opacity = 0;
+</body>
+</html>
