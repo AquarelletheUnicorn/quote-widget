@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <title>Quote Widget</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       padding: 0;
@@ -11,6 +15,23 @@
       background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb') no-repeat center center fixed;
       background-size: cover;
       color: white;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Brume animée superposée */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif') no-repeat center center;
+      background-size: cover;
+      opacity: 0.06;
+      pointer-events: none;
+      z-index: 0;
     }
 
     .widget {
@@ -21,6 +42,8 @@
       border-radius: 10px;
       text-align: center;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+      position: relative;
+      z-index: 2;
     }
 
     .widget h1 {
@@ -29,45 +52,76 @@
       letter-spacing: 2px;
     }
 
+    .quote-text, .quote-author {
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+    }
+
     .quote-text {
       font-style: italic;
       font-size: 1.2em;
       line-height: 1.6;
-      transition: opacity 0.5s ease-in-out;
+    }
+
+    .quote-author {
+      margin-top: 10px;
+      font-size: 1em;
+      font-weight: 300;
     }
   </style>
 </head>
 <body>
   <div class="widget">
     <h1>Quote</h1>
-    <blockquote class="quote-text" id="quoteText">
-      Chargement de la citation...
-    </blockquote>
+    <blockquote class="quote-text" id="quoteText">Chargement…</blockquote>
+    <p class="quote-author" id="quoteAuthor"></p>
   </div>
 
   <script>
     const quotes = [
-      "« La nature est un temple où de vivants piliers... » — Charles Baudelaire",
-      "« Il n’y a point de génie sans un grain de folie. » — Aristote",
-      "« Le plus grand secret du bonheur, c’est d’être bien avec soi. » — Bernard Fontenelle",
-      "« Celui qui déplace une montagne commence par déplacer de petites pierres. » — Confucius",
-      "« En marchant dans les bois, on trouve bien plus que ce que l’on cherche. » — John Muir"
+      {
+        text: "« La nature est un temple où de vivants piliers... »",
+        author: "Charles Baudelaire"
+      },
+      {
+        text: "« Il n’y a point de génie sans un grain de folie. »",
+        author: "Aristote"
+      },
+      {
+        text: "« Le plus grand secret du bonheur, c’est d’être bien avec soi. »",
+        author: "Bernard Fontenelle"
+      },
+      {
+        text: "« Celui qui déplace une montagne commence par déplacer de petites pierres. »",
+        author: "Confucius"
+      },
+      {
+        text: "« En marchant dans les bois, on trouve bien plus que ce que l’on cherche. »",
+        author: "John Muir"
+      }
     ];
 
     function showRandomQuote() {
       const quoteEl = document.getElementById("quoteText");
-      const newQuote = quotes[Math.floor(Math.random() * quotes.length)];
+      const authorEl = document.getElementById("quoteAuthor");
+
+      const quote = quotes[Math.floor(Math.random() * quotes.length)];
+
       quoteEl.style.opacity = 0;
+      authorEl.style.opacity = 0;
+
       setTimeout(() => {
-        quoteEl.textContent = newQuote;
+        quoteEl.textContent = quote.text;
+        authorEl.textContent = `— ${quote.author}`;
         quoteEl.style.opacity = 1;
+        authorEl.style.opacity = 1;
       }, 500);
     }
 
     // Initial load
     showRandomQuote();
 
-    // Change quote every 10 minutes (600000 ms)
+    // Update every 10 minutes
     setInterval(showRandomQuote, 600000);
   </script>
 </body>
